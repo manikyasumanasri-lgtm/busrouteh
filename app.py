@@ -714,4 +714,5 @@ if __name__ == "__main__":
     logging.info("6. Clear all data at /admin/clear-all-data")
     logging.info("7. Clean unknown buses at /admin/cleanup-unknown-buses")
     logging.info("=" * 70)
-    app.run(host="0.0.0.0", port=8080, debug=True)
+
+    app.run(host="0.0.0.0", port=5000, debug=True)
