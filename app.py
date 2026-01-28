@@ -706,7 +706,7 @@ if __name__ == "__main__":
     logging.info(f"📍 Total Buses Available: {len(buses)}")
     logging.info(f"🚍 Bus Routes: {', '.join(buses.keys())}")
     logging.info("=" * 70)
-    logging.info("1. Register at http://localhost:8080/register")
+    logging.info("1. Register at http://localhost:5000/register")
     logging.info("2. Login and explore all bus routes!")
     logging.info("3. Click 🛰️ GPS buttons to simulate real-time tracking")
     logging.info("4. Subscribe to alerts at /subscribe")
@@ -714,5 +714,4 @@ if __name__ == "__main__":
     logging.info("6. Clear all data at /admin/clear-all-data")
     logging.info("7. Clean unknown buses at /admin/cleanup-unknown-buses")
     logging.info("=" * 70)
-
     app.run(host="0.0.0.0", port=5000, debug=True)
