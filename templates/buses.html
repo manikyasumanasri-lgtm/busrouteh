@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero">
+    <h1>All Bus Routes</h1>
+    <p style="font-size: 18px; margin-top: 8px;">Complete list of available buses</p>
+</div>
+
+<div class="grid">
+    {% for bus_id, bus in buses.items() %}
+    <div class="card">
+        <h3 style="color: #667eea; margin-bottom: 12px;">🚌 {{ bus_id }}</h3>
+        <p style="color: #334155; font-weight: 500; margin-bottom: 8px;">{{ bus.route }}</p>
+        <p style="color: #64748b; font-size: 14px;">⏱️ {{ bus.frequency }}</p>
+        <p style="color: #64748b; font-size: 14px; margin-top: 4px;">🚍 {{ bus.type }}</p>
+
+        <a class="btn" href="{{ url_for('bus_details', bus_id=bus_id) }}"
+           style="width: 100%; text-align: center; margin-top: 16px; display: block;">
+            View Details
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

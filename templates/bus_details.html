@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero">
+    <h1>🚌 Bus {{ bus_id }}</h1>
+    <p style="font-size: 18px; margin-top: 8px;">{{ bus.route }}</p>
+</div>
+
+<div class="card">
+    <h3 style="color: #667eea; margin-bottom: 16px;">Route Information</h3>
+
+    <div style="display: grid; gap: 12px; margin-bottom: 20px;">
+        <p><strong style="color: #334155;">Type:</strong> <span style="color: #64748b;">{{ bus.type }}</span></p>
+        <p><strong style="color: #334155;">Frequency:</strong> <span style="color: #64748b;">{{ bus.frequency }}</span></p>
+    </div>
+
+    <h4 style="margin-top: 24px; margin-bottom: 12px; color: #334155;">Bus Stops</h4>
+    <ol style="padding-left: 20px; color: #64748b;">
+        {% for stop in bus.stops %}
+        <li style="margin: 8px 0; line-height: 1.6;">
+            <strong style="color: #334155;">{{ stop.name }}</strong>
+            <span style="font-size: 13px; color: #94a3b8;">
+                ({{ "%.4f"|format(stop.lat) }}, {{ "%.4f"|format(stop.lon) }})
+            </span>
+        </li>
+        {% endfor %}
+    </ol>
+</div>
+
+{% if latest %}
+<div class="card">
+    <h3 style="color: #10b981; margin-bottom: 16px;">📍 Latest Position</h3>
+
+    <div style="display: grid; gap: 12px;">
+        <p><strong style="color: #334155;">Time:</strong>
+           <span style="color: #64748b;">{{ latest.FormattedTime }}</span></p>
+
+        <p><strong style="color: #334155;">Speed:</strong>
+           <span style="color: #64748b;">{{ "%.1f"|format(latest.SpeedKmph) }} km/h</span></p>
+
+        <p><strong style="color: #334155;">Status:</strong>
+           <span style="color: #10b981; font-weight: 600;">{{ latest.Status }}</span></p>
+
+        <p><strong style="color: #334155;">Next Stop:</strong>
+           <span style="color: #667eea; font-weight: 600;">{{ latest.NextStop }}</span></p>
+
+        <p><strong style="color: #334155;">Distance to Stop:</strong>
+           <span style="color: #64748b;">{{ "%.2f"|format(latest.DistanceToStopKm) }} km</span></p>
+
+        {% if 'Latitude' in latest %}
+        <p><strong style="color: #334155;">Coordinates:</strong>
+           <span style="color: #64748b; font-size: 13px;">
+               {{ "%.4f"|format(latest.Latitude) }}, {{ "%.4f"|format(latest.Longitude) }}
+           </span></p>
+        {% endif %}
+    </div>
+</div>
+{% else %}
+<div class="card" style="text-align: center; padding: 40px 20px;">
+    <p style="color: #64748b; font-size: 16px;">📡 No tracking data available yet</p>
+    <p style="color: #94a3b8; font-size: 14px; margin-top: 8px;">
+        Click the GPS button below to simulate bus tracking
+    </p>
+</div>
+{% endif %}
+
+<div style="display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap;">
+    <a class="btn secondary" href="{{ url_for('simulate', bus_id=bus_id) }}"
+       style="flex: 1; text-align: center; min-width: 150px;">
+        🛰️ Simulate GPS
+    </a>
+
+    <a class="btn" href="{{ url_for('bus_history', bus_id=bus_id) }}"
+       style="flex: 1; text-align: center; min-width: 150px;">
+        📜 View History
+    </a>
+
+    <a class="btn" href="{{ url_for('home') }}"
+       style="flex: 1; text-align: center; min-width: 150px; background: linear-gradient(135deg, #64748b, #475569);">
+        ← Back to Home
+    </a>
+</div>
+{% endblock %}

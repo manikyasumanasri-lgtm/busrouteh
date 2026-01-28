@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="max-width: 450px; margin: 60px auto;">
+    <div class="card">
+        <h2 style="text-align: center; margin-bottom: 24px; color: #667eea;">Create Account</h2>
+
+        <form method="POST">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required autofocus>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="email">Email (Optional)</label>
+            <input type="email" id="email" name="email" placeholder="For alert notifications">
+
+            <button class="btn" type="submit" style="width: 100%; margin-top: 8px;">
+                Register
+            </button>
+        </form>
+
+        <p style="margin-top: 20px; text-align: center; color: #64748b;">
+            Already have an account?
+            <a href="{{ url_for('login') }}" style="color: #667eea; font-weight: 600;">Login</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
